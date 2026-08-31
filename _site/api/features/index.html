@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Define features and reusable Proffer feature sets.">
+    <title>Features API - Proffer</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body data-baseurl="">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="topbar" aria-label="Site header">
+      <button class="icon-button menu-toggle" type="button" aria-label="Open navigation" aria-controls="site-sidebar" aria-expanded="false">
+        <span aria-hidden="true"></span>
+      </button>
+      <a class="brand" href="/">Proffer</a>
+      <div class="topbar-actions">
+        <button class="search-trigger" type="button" aria-label="Focus search">
+          <span aria-hidden="true">Search</span>
+          <kbd>/</kbd>
+        </button>
+        <button class="icon-button theme-toggle" type="button" aria-label="Toggle color theme">
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="site-shell">
+      <aside class="sidebar" id="site-sidebar" aria-label="Primary navigation">
+        <div class="sidebar-inner">
+  <label class="search-box">
+    <span class="visually-hidden">Search documentation</span>
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path>
+    </svg>
+    <input id="site-search" type="search" placeholder="Search docs..." autocomplete="off">
+  </label>
+
+  <div class="search-results" id="search-results" aria-live="polite"></div>
+
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <section class="nav-group">
+      <h2>General</h2>
+      <ul>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/installation/">Installation</a></li>
+        <li>
+          <details class="nav-dropdown" open>
+            <summary class="nav-dropdown-toggle">API Reference</summary>
+            <ul class="nav-submenu">
+              <li><a class="nav-link" href="/api/">Overview</a></li>
+              <li><a class="nav-link" href="/api/application/">Application</a></li>
+              <li><a class="nav-link" href="/api/data/">Data</a></li>
+              <li><a class="nav-link" href="/api/features/" aria-current="page">Features</a></li>
+              <li class="nav-branch-item">
+                <div class="nav-branch">
+                  <a class="nav-link nav-branch-link" href="/api/algorithms/">Algorithms</a>
+                  <button class="nav-branch-toggle" type="button" aria-label="Toggle Algorithms pages" aria-controls="nav-algorithms-pages" aria-expanded="false" data-nav-toggle>
+                    <span aria-hidden="true"></span>
+                  </button>
+                </div>
+                <ul class="nav-submenu nav-submenu-child" id="nav-algorithms-pages" hidden>
+                  <li><a class="nav-link" href="/api/algorithms/parameters/">Registration Parameters</a></li>
+                </ul>
+              </li>
+              <li><a class="nav-link" href="/api/pipeline/">Pipeline Configuration</a></li>
+              <li><a class="nav-link" href="/api/contexts/">Runtime Contexts</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav-link" href="/tutorials/">Tutorials</a></li>
+      </ul>
+    </section>
+    <section class="nav-group">
+      <h2>About</h2>
+      <ul>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><a class="nav-link" href="/citation/">Citation</a></li>
+        <li><a class="nav-link" href="https://github.com/benjaminhervit/benjaminhervit.github.io">GitHub</a></li>
+      </ul>
+    </section>
+  </nav>
+</div>
+
+      </aside>
+
+      <main class="main" id="main-content" tabindex="-1">
+        <article class="article">
+          <header class="page-header">
+  <h1>Features</h1>
+  <p>Transform signal windows into numeric values used by detection algorithms.</p>
+</header>
+
+<h2 id="default-feature-set">Default Feature Set</h2>
+
+<p>When an algorithm uses <code class="language-plaintext highlighter-rouge">input_type="features"</code> and does not specify a separate feature configuration, Proffer extracts the complete default feature set automatically. Features are calculated independently for each signal window and channel, then exposed through <code class="language-plaintext highlighter-rouge">context.features</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">scaled_values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">(</span><span class="n">scaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">frame</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">dataframe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>The default set contains eight features:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Category</th>
+      <th>Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">petrosian_fd</code></td>
+      <td>Complexity</td>
+      <td>Petrosian fractal dimension. It summarizes signal complexity from sign changes in the first derivative.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">higuchi_fd</code></td>
+      <td>Complexity</td>
+      <td>Higuchi fractal dimension. It estimates curve complexity across multiple temporal scales; the current default implementation uses a maximum scale of 10.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">alpha_delta_ratio</code></td>
+      <td>Frequency content</td>
+      <td>Alpha-band power divided by delta-band power. Power is estimated with Welch’s method using 8-15 Hz for alpha and 0-3 Hz for delta.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">n_bursts</code></td>
+      <td>Burst activity</td>
+      <td>Number of continuous sample sequences above the window mean plus two standard deviations.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">burst_len_mean</code></td>
+      <td>Burst activity</td>
+      <td>Mean detected burst duration in seconds. Returns <code class="language-plaintext highlighter-rouge">0</code> when no bursts are detected.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">burst_len_std</code></td>
+      <td>Burst activity</td>
+      <td>Standard deviation of detected burst durations in seconds. Returns <code class="language-plaintext highlighter-rouge">0</code> when no bursts are detected.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">zero_crossings</code></td>
+      <td>Signal transitions</td>
+      <td>Number of sign changes within the window, providing a simple measure of oscillation and rapid temporal variation.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">n_spikes</code></td>
+      <td>Extreme amplitudes</td>
+      <td>Number of samples whose absolute deviation from the window mean exceeds three standard deviations.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="using-default-features">Using Default Features</h2>
+
+<p>Omitting <code class="language-plaintext highlighter-rouge">features</code> from a feature-based algorithm registration selects the complete default set:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">proffer</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="n">my_detector</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"MyDetector"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s">"unsupervised"</span><span class="p">,</span>
+    <span class="n">input_type</span><span class="o">=</span><span class="s">"features"</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>The callable receives a feature row for each Proffer signal window:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">my_detector</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">(</span><span class="n">scaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">run_detection</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">predictions</span>
+</code></pre></div></div>
+
+<p>Input type determines whether the default matrix is available:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">input_type</code></th>
+      <th>Default feature matrix</th>
+      <th>Raw signal input</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">features</code></td>
+      <td>Available through <code class="language-plaintext highlighter-rouge">context.features</code></td>
+      <td>Not provided</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">raw_signal</code></td>
+      <td>Not provided</td>
+      <td>Available through <code class="language-plaintext highlighter-rouge">context.raw_signal</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">features_and_raw</code></td>
+      <td>Available through <code class="language-plaintext highlighter-rouge">context.features</code></td>
+      <td>Available through <code class="language-plaintext highlighter-rouge">context.raw_signal</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A combined algorithm can use both representations:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">combined_detector</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">feature_values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">(</span><span class="n">scaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">signal_windows</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">raw_signal</span><span class="p">.</span><span class="n">windows</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">run_combined_detection</span><span class="p">(</span>
+        <span class="n">feature_values</span><span class="p">,</span>
+        <span class="n">signal_windows</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="feature-callable">Feature Callable</h2>
+
+<p>A feature accepts one signal window and returns either one number or a dictionary of named numbers.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">rms</span><span class="p">(</span><span class="n">signal</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">square</span><span class="p">(</span><span class="n">values</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p>Add a context argument when the calculation needs sampling or window metadata:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">spectral_feature</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">calculate_spectrum</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="n">context</span><span class="p">.</span><span class="n">fs</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>A function named <code class="language-plaintext highlighter-rouge">amplitude</code> returning <code class="language-plaintext highlighter-rouge">{"mean": ..., "maximum": ...}</code> produces the columns <code class="language-plaintext highlighter-rouge">amplitude__mean</code> and <code class="language-plaintext highlighter-rouge">amplitude__maximum</code>.</p>
+
+<h2 id="artiplexfeature_set"><code class="language-plaintext highlighter-rouge">artiplex.feature_set()</code></h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">signal_shape</span> <span class="o">=</span> <span class="n">artiplex</span><span class="p">.</span><span class="n">feature_set</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"signal_shape"</span><span class="p">,</span>
+    <span class="n">features</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">rms</span><span class="p">,</span>
+        <span class="s">"zero_crossings"</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Feature sets can combine module-level functions with built-in feature names. Passing a custom function registers it automatically.</p>
+
+<h2 id="artiplexavailable_features"><code class="language-plaintext highlighter-rouge">artiplex.available_features()</code></h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">artiplex</span><span class="p">.</span><span class="n">available_features</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Use <code class="language-plaintext highlighter-rouge">available_features()</code> as the authoritative list for the installed version. The default set is documented in <a href="#default-feature-set">Default Feature Set</a>.</p>
+
+        </article>
+
+        <footer class="footer" aria-label="Site footer">
+  <p>2026, Proffer project</p>
+  <nav aria-label="Footer links">
+    <a href="/citation/">Citation</a>
+    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io">Repository</a>
+    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io/issues">Issues</a>
+  </nav>
+</footer>
+
+      </main>
+
+      
+        <aside class="toc" aria-label="Page contents">
+          <div class="toc-inner">
+            <p class="toc-title">On this page</p>
+            <nav>
+              <ul>
+                
+                  <li><a href="#default-feature-set">Default Feature Set</a></li>
+                
+                  <li><a href="#using-default-features">Using Default Features</a></li>
+                
+                  <li><a href="#feature-callable">Feature Callable</a></li>
+                
+                  <li><a href="#profferfeature_set">feature_set</a></li>
+                
+                  <li><a href="#profferavailable_features">available_features</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+        </aside>
+      
+    </div>
+
+    <div class="backdrop" data-backdrop hidden></div>
+    <script src="/assets/site.js" defer></script>
+  </body>
+</html>

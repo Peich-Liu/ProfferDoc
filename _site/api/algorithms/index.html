@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Register custom Proffer detection algorithms.">
+    <title>Algorithms API - Proffer</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body data-baseurl="">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="topbar" aria-label="Site header">
+      <button class="icon-button menu-toggle" type="button" aria-label="Open navigation" aria-controls="site-sidebar" aria-expanded="false">
+        <span aria-hidden="true"></span>
+      </button>
+      <a class="brand" href="/">Proffer</a>
+      <div class="topbar-actions">
+        <button class="search-trigger" type="button" aria-label="Focus search">
+          <span aria-hidden="true">Search</span>
+          <kbd>/</kbd>
+        </button>
+        <button class="icon-button theme-toggle" type="button" aria-label="Toggle color theme">
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="site-shell">
+      <aside class="sidebar" id="site-sidebar" aria-label="Primary navigation">
+        <div class="sidebar-inner">
+  <label class="search-box">
+    <span class="visually-hidden">Search documentation</span>
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path>
+    </svg>
+    <input id="site-search" type="search" placeholder="Search docs..." autocomplete="off">
+  </label>
+
+  <div class="search-results" id="search-results" aria-live="polite"></div>
+
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <section class="nav-group">
+      <h2>General</h2>
+      <ul>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/installation/">Installation</a></li>
+        <li>
+          <details class="nav-dropdown" open>
+            <summary class="nav-dropdown-toggle">API Reference</summary>
+            <ul class="nav-submenu">
+              <li><a class="nav-link" href="/api/">Overview</a></li>
+              <li><a class="nav-link" href="/api/application/">Application</a></li>
+              <li><a class="nav-link" href="/api/data/">Data</a></li>
+              <li><a class="nav-link" href="/api/features/">Features</a></li>
+              <li class="nav-branch-item">
+                <div class="nav-branch">
+                  <a class="nav-link nav-branch-link" href="/api/algorithms/" aria-current="page">Algorithms</a>
+                  <button class="nav-branch-toggle" type="button" aria-label="Toggle Algorithms pages" aria-controls="nav-algorithms-pages" aria-expanded="true" data-nav-toggle>
+                    <span aria-hidden="true"></span>
+                  </button>
+                </div>
+                <ul class="nav-submenu nav-submenu-child" id="nav-algorithms-pages">
+                  <li><a class="nav-link" href="/api/algorithms/parameters/">Registration Parameters</a></li>
+                </ul>
+              </li>
+              <li><a class="nav-link" href="/api/pipeline/">Pipeline Configuration</a></li>
+              <li><a class="nav-link" href="/api/contexts/">Runtime Contexts</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav-link" href="/tutorials/">Tutorials</a></li>
+      </ul>
+    </section>
+    <section class="nav-group">
+      <h2>About</h2>
+      <ul>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><a class="nav-link" href="/citation/">Citation</a></li>
+        <li><a class="nav-link" href="https://github.com/benjaminhervit/benjaminhervit.github.io">GitHub</a></li>
+      </ul>
+    </section>
+  </nav>
+</div>
+
+      </aside>
+
+      <main class="main" id="main-content" tabindex="-1">
+        <article class="article">
+          <header class="page-header">
+  <h1>Algorithms</h1>
+  <p>Register custom detection methods that produce one prediction per signal window.</p>
+</header>
+
+<p>Proffer provides a built-in algorithm library and supports user-defined detection methods. Custom algorithms can run alongside the built-in collection or independently, and can optionally participate in result fusion. Every algorithm returns one prediction per signal window: <code class="language-plaintext highlighter-rouge">0</code> means normal and <code class="language-plaintext highlighter-rouge">1</code> means anomalous.</p>
+
+<h2 id="default-algorithm-library">Default Algorithm Library</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Algorithm</th>
+      <th>Configuration name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Unsupervised</td>
+      <td>K-Means</td>
+      <td><code class="language-plaintext highlighter-rouge">KMeans</code></td>
+    </tr>
+    <tr>
+      <td>Unsupervised</td>
+      <td>Gaussian mixture model</td>
+      <td><code class="language-plaintext highlighter-rouge">GMM</code></td>
+    </tr>
+    <tr>
+      <td>Unsupervised</td>
+      <td>Histogram-based outlier score</td>
+      <td><code class="language-plaintext highlighter-rouge">HBOS</code></td>
+    </tr>
+    <tr>
+      <td>Unsupervised</td>
+      <td>Local outlier factor</td>
+      <td><code class="language-plaintext highlighter-rouge">LOF</code></td>
+    </tr>
+    <tr>
+      <td>Unsupervised</td>
+      <td>K-nearest neighbors</td>
+      <td><code class="language-plaintext highlighter-rouge">KNN</code></td>
+    </tr>
+    <tr>
+      <td>Supervised</td>
+      <td>XGBoost</td>
+      <td><code class="language-plaintext highlighter-rouge">XGBoost</code></td>
+    </tr>
+    <tr>
+      <td>Supervised</td>
+      <td>Random Forest</td>
+      <td><code class="language-plaintext highlighter-rouge">RandomForest</code></td>
+    </tr>
+    <tr>
+      <td>Supervised</td>
+      <td>Logistic Regression</td>
+      <td><code class="language-plaintext highlighter-rouge">LogReg</code></td>
+    </tr>
+    <tr>
+      <td>Supervised</td>
+      <td>SVM with RBF kernel</td>
+      <td><code class="language-plaintext highlighter-rouge">SVM_RBF</code></td>
+    </tr>
+    <tr>
+      <td>Supervised</td>
+      <td>Extra Trees</td>
+      <td><code class="language-plaintext highlighter-rouge">ExtraTrees</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Built-in unsupervised algorithms can run directly. Built-in supervised algorithms run when their trained models are available and currently use the complete default Proffer feature set.</p>
+
+<h2 id="profferregister_algorithm"><code class="language-plaintext highlighter-rouge">proffer.register_algorithm()</code></h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">proffer</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="n">my_algorithm</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"my_algorithm"</span><span class="p">,</span>
+    <span class="n">input_type</span><span class="o">=</span><span class="s">"features"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s">"unsupervised"</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s">"1"</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{},</span>
+    <span class="n">participate_in_fusion</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">features</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/api/algorithms/parameters/#algorithm"><code class="language-plaintext highlighter-rouge">algorithm</code></a></td>
+      <td>Module-level function that implements the detector.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/algorithms/parameters/#name"><code class="language-plaintext highlighter-rouge">name</code></a></td>
+      <td>Name shown to Proffer. If omitted, the function name is used.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/algorithms/parameters/#input_type"><code class="language-plaintext highlighter-rouge">input_type</code></a></td>
+      <td>Select features, raw signals, or both as algorithm input.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/algorithms/parameters/#kind"><code class="language-plaintext highlighter-rouge">kind</code></a></td>
+      <td>Describe the algorithm’s training and inference role.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/algorithms/parameters/#version"><code class="language-plaintext highlighter-rouge">version</code></a></td>
+      <td>User-managed implementation version.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/algorithms/parameters/#parameters"><code class="language-plaintext highlighter-rouge">parameters</code></a></td>
+      <td>JSON-serializable configuration exposed to the callable.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/algorithms/parameters/#participate_in_fusion"><code class="language-plaintext highlighter-rouge">participate_in_fusion</code></a></td>
+      <td>Control whether predictions enter result fusion.</td>
+    </tr>
+    <tr>
+      <td><a href="/api/algorithms/parameters/#features"><code class="language-plaintext highlighter-rouge">features</code></a></td>
+      <td>Assign feature functions, built-in names, or a feature set.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If <code class="language-plaintext highlighter-rouge">features</code> is omitted, the algorithm uses the <a href="/api/features/#default-feature-set">complete default feature set</a>. Passing feature functions directly registers them automatically.</p>
+
+<p><a href="/api/algorithms/parameters/">Open the complete registration parameter reference</a></p>
+
+<h2 id="algorithm-types">Algorithm Types</h2>
+
+<h3 id="unsupervised"><code class="language-plaintext highlighter-rouge">unsupervised</code></h3>
+
+<p>Use <code class="language-plaintext highlighter-rouge">unsupervised</code> for unsupervised and self-supervised methods, including models that manage their own training inside the algorithm callable.</p>
+
+<h3 id="supervised"><code class="language-plaintext highlighter-rouge">supervised</code></h3>
+
+<p>Use <code class="language-plaintext highlighter-rouge">supervised</code> for algorithms that depend on labeled data. Custom supervised algorithms currently use the default feature set only. The algorithm implementation is responsible for training and model persistence.</p>
+
+<h3 id="imported_model"><code class="language-plaintext highlighter-rouge">imported_model</code></h3>
+
+<p>Use <code class="language-plaintext highlighter-rouge">imported_model</code> for a model trained outside Proffer. Imported models are inference-only from Proffer’s perspective: they are not included in its training workflow and are not updated with Proffer data. Their predictions can still participate in result fusion.</p>
+
+<h2 id="algorithm-context">Algorithm Context</h2>
+
+<p>Feature-based algorithms can access prepared features and their corresponding windows:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">scaled_values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">(</span><span class="n">scaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">frame</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">dataframe</span><span class="p">()</span>
+<span class="n">windows</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">windows</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Raw-signal algorithms can access NumPy arrays, tensors, or windows:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">signal</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">raw_signal</span><span class="p">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">signal_tensor</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">raw_signal</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">signal_windows</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">raw_signal</span><span class="p">.</span><span class="n">windows</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Algorithms registered with <code class="language-plaintext highlighter-rouge">input_type="features_and_raw"</code> can access both <code class="language-plaintext highlighter-rouge">context.features</code> and <code class="language-plaintext highlighter-rouge">context.raw_signal</code>.</p>
+
+<p>Additional runtime information is available through <code class="language-plaintext highlighter-rouge">context.parameters</code>, <code class="language-plaintext highlighter-rouge">context.fs</code>, <code class="language-plaintext highlighter-rouge">context.window_size</code>, <code class="language-plaintext highlighter-rouge">context.segment_idx</code>, and <code class="language-plaintext highlighter-rouge">context.model_dir</code>.</p>
+
+<h2 id="custom-unsupervised-algorithm">Custom Unsupervised Algorithm</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">kind="unsupervised"</code> for clustering, distance-based detection, density estimation, outlier detection, and other methods that do not require labels.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">proffer</span>
+
+
+<span class="k">def</span> <span class="nf">robust_distance</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">(</span><span class="n">scaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">asarray</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="n">center</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">median</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">norm</span><span class="p">(</span><span class="n">values</span> <span class="o">-</span> <span class="n">center</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">distances</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+
+<span class="n">proffer</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="n">robust_distance</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"RobustDistance"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s">"unsupervised"</span><span class="p">,</span>
+    <span class="n">input_type</span><span class="o">=</span><span class="s">"features"</span><span class="p">,</span>
+    <span class="n">participate_in_fusion</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">proffer</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">use_default_algorithms</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="custom-supervised-algorithm">Custom Supervised Algorithm</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">kind="supervised"</code> for a user-defined prediction method that depends on labeled data. A supervised callable can load a user-managed trained model and apply it to the current feature windows.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">artiplex</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+
+<span class="k">def</span> <span class="nf">custom_supervised_detector</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">asarray</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="n">model_path</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">model_dir</span><span class="p">)</span>
+        <span class="o">/</span> <span class="sa">f</span><span class="s">"custom_supervised_</span><span class="si">{</span><span class="n">context</span><span class="p">.</span><span class="n">window_size</span><span class="si">}</span><span class="s">.joblib"</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">model_path</span><span class="p">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="nb">FileNotFoundError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s">"model not found: </span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s">"</span>
+        <span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">joblib</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">values</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+
+<span class="n">artiplex</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="n">custom_supervised_detector</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"CustomSupervisedDetector"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s">"supervised"</span><span class="p">,</span>
+    <span class="n">input_type</span><span class="o">=</span><span class="s">"features"</span><span class="p">,</span>
+    <span class="n">participate_in_fusion</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Artiplex’s automatic training workflow trains the built-in supervised algorithms. For a user-defined supervised algorithm, the user manages the labeled data, training process, model format, checkpoints, and feature compatibility. Custom supervised algorithms currently use the default Artiplex feature set only.</p>
+
+<h2 id="self-supervised-algorithm">Self-supervised Algorithm</h2>
+
+<p>A self-supervised method creates its training target from the input signal and does not require human labels. This example predicts the next sample from previous samples and uses prediction error as an anomaly score.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">artiplex</span>
+
+
+<span class="k">def</span> <span class="nf">self_supervised_detector</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">context</span><span class="p">.</span><span class="n">raw_signal</span><span class="p">.</span><span class="n">windows</span><span class="p">():</span>
+        <span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">signal</span><span class="p">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">errors</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">signal</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">targets</span> <span class="o">=</span> <span class="n">signal</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="n">coefficient</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">lstsq</span><span class="p">(</span>
+            <span class="n">inputs</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">targets</span><span class="p">,</span>
+            <span class="n">rcond</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">prediction</span> <span class="o">=</span> <span class="n">inputs</span> <span class="o">*</span> <span class="n">coefficient</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">errors</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">((</span><span class="n">targets</span> <span class="o">-</span> <span class="n">prediction</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+
+<span class="n">artiplex</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="n">self_supervised_detector</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"SelfSupervisedDetector"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s">"unsupervised"</span><span class="p">,</span>
+    <span class="n">input_type</span><span class="o">=</span><span class="s">"raw_signal"</span><span class="p">,</span>
+    <span class="n">participate_in_fusion</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Self-supervised methods use <code class="language-plaintext highlighter-rouge">kind="unsupervised"</code> because they do not depend on labeled Artiplex data.</p>
+
+<h2 id="trainable-deep-learning">Trainable Deep Learning</h2>
+
+<p>A custom deep learning algorithm can restore a checkpoint, continue training, save its updated state, and then produce predictions. Artiplex invokes the callable; the implementation manages the network, loss, optimizer, training schedule, and checkpoint format.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">artiplex</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+
+<span class="k">def</span> <span class="nf">trainable_deep_detector</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">(</span><span class="n">scaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">asarray</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">MyAutoencoder</span><span class="p">(</span><span class="n">inputs</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+    <span class="n">checkpoint_path</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">model_dir</span><span class="p">)</span> <span class="o">/</span> <span class="s">"custom_autoencoder.pt"</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">checkpoint_path</span><span class="p">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="n">checkpoint</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="n">checkpoint_path</span><span class="p">,</span>
+            <span class="n">map_location</span><span class="o">=</span><span class="s">"cpu"</span><span class="p">,</span>
+            <span class="n">weights_only</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">model</span><span class="p">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">[</span><span class="s">"model_state"</span><span class="p">])</span>
+        <span class="n">optimizer</span><span class="p">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">[</span><span class="s">"optimizer_state"</span><span class="p">])</span>
+
+    <span class="n">model</span><span class="p">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">reconstruction</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">mean</span><span class="p">((</span><span class="n">reconstruction</span> <span class="o">-</span> <span class="n">inputs</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">optimizer</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="n">torch</span><span class="p">.</span><span class="n">save</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s">"model_state"</span><span class="p">:</span> <span class="n">model</span><span class="p">.</span><span class="n">state_dict</span><span class="p">(),</span>
+            <span class="s">"optimizer_state"</span><span class="p">:</span> <span class="n">optimizer</span><span class="p">.</span><span class="n">state_dict</span><span class="p">(),</span>
+        <span class="p">},</span>
+        <span class="n">checkpoint_path</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">model</span><span class="p">.</span><span class="nb">eval</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">inference_mode</span><span class="p">():</span>
+        <span class="n">reconstruction</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">reconstruction</span> <span class="o">-</span> <span class="n">inputs</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">threshold</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">int64</span><span class="p">)</span>
+
+
+<span class="n">artiplex</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="n">trainable_deep_detector</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"TrainableDeepDetector"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s">"unsupervised"</span><span class="p">,</span>
+    <span class="n">input_type</span><span class="o">=</span><span class="s">"features"</span><span class="p">,</span>
+    <span class="n">participate_in_fusion</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Training continues between calls because the algorithm explicitly restores and saves both model and optimizer state in <code class="language-plaintext highlighter-rouge">context.model_dir</code>.</p>
+
+<h2 id="imported-model">Imported Model</h2>
+
+<p>Use <code class="language-plaintext highlighter-rouge">kind="imported_model"</code> when a model was trained outside Artiplex and should only produce predictions.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">artiplex</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+
+<span class="k">def</span> <span class="nf">imported_deep_detector</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">(</span><span class="n">scaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">asarray</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">model_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">parameters</span><span class="p">[</span><span class="s">"model_path"</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">model_path</span><span class="p">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="nb">FileNotFoundError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s">"model not found: </span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s">"</span>
+        <span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">jit</span><span class="p">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">model_path</span><span class="p">),</span>
+        <span class="n">map_location</span><span class="o">=</span><span class="s">"cpu"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">model</span><span class="p">.</span><span class="n">requires_grad_</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">model</span><span class="p">.</span><span class="nb">eval</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">inference_mode</span><span class="p">():</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">scores</span><span class="p">.</span><span class="n">numel</span><span class="p">()</span> <span class="o">!=</span> <span class="n">inputs</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span>
+            <span class="s">"the model must return one score per window"</span>
+        <span class="p">)</span>
+
+    <span class="n">threshold</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+        <span class="n">context</span><span class="p">.</span><span class="n">parameters</span><span class="p">[</span><span class="s">"decision_threshold"</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">int64</span><span class="p">)</span>
+
+
+<span class="n">artiplex</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="n">imported_deep_detector</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"ImportedDeepDetector"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s">"imported_model"</span><span class="p">,</span>
+    <span class="n">input_type</span><span class="o">=</span><span class="s">"features"</span><span class="p">,</span>
+    <span class="n">participate_in_fusion</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">"model_path"</span><span class="p">:</span> <span class="s">"/path/to/pretrained_model.pt"</span><span class="p">,</span>
+        <span class="s">"decision_threshold"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>An imported model does not create an optimizer, call <code class="language-plaintext highlighter-rouge">backward()</code>, save updated weights, or enter the Artiplex supervised training workflow. Its predictions can still participate in result fusion. The external model must use the same feature order and preprocessing as the input supplied by Artiplex.</p>
+
+<h2 id="output">Output</h2>
+
+<p>The algorithm must return one prediction for every Artiplex window. Supported output types are Python lists, NumPy arrays, Pandas Series, and PyTorch tensors.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Artiplex interprets <code class="language-plaintext highlighter-rouge">0</code> as normal and <code class="language-plaintext highlighter-rouge">1</code> as anomalous. The number of returned predictions must equal the number of input windows.</p>
+
+<h2 id="configure-default-algorithms">Configure Default Algorithms</h2>
+
+<p>Default algorithms are enabled automatically. Registered user algorithms are added to the same pipeline.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">artiplex</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Equivalent explicit configuration
+</span><span class="n">artiplex</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">use_default_algorithms</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Disable the complete built-in collection to run only registered user algorithms:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">artiplex</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">use_default_algorithms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Select or exclude algorithms by their configuration names:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Run these built-ins plus registered user algorithms.
+</span><span class="n">artiplex</span><span class="p">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">default_algorithms</span><span class="o">=</span><span class="p">[</span>
+        <span class="s">"KMeans"</span><span class="p">,</span>
+        <span class="s">"LOF"</span><span class="p">,</span>
+        <span class="s">"RandomForest"</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># Run all built-ins except these algorithms.
+</span><span class="n">artiplex</span><span class="p">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">exclude_default_algorithms</span><span class="o">=</span><span class="p">[</span>
+        <span class="s">"GMM"</span><span class="p">,</span>
+        <span class="s">"SVM_RBF"</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">default_algorithms</code> and <code class="language-plaintext highlighter-rouge">exclude_default_algorithms</code> cannot be used together. Neither option may be provided when <code class="language-plaintext highlighter-rouge">use_default_algorithms=False</code>.</p>
+
+        </article>
+
+        <footer class="footer" aria-label="Site footer">
+  <p>2026, Proffer project</p>
+  <nav aria-label="Footer links">
+    <a href="/citation/">Citation</a>
+    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io">Repository</a>
+    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io/issues">Issues</a>
+  </nav>
+</footer>
+
+      </main>
+
+      
+        <aside class="toc" aria-label="Page contents">
+          <div class="toc-inner">
+            <p class="toc-title">On this page</p>
+            <nav>
+              <ul>
+                
+                  <li><a href="#default-algorithm-library">Default Algorithm Library</a></li>
+                
+                  <li><a href="#profferregister_algorithm">register_algorithm</a></li>
+                
+                  <li><a href="#algorithm-types">Algorithm Types</a></li>
+                
+                  <li><a href="#algorithm-context">Algorithm Context</a></li>
+                
+                  <li><a href="#custom-unsupervised-algorithm">Custom Unsupervised</a></li>
+                
+                  <li><a href="#custom-supervised-algorithm">Custom Supervised</a></li>
+                
+                  <li><a href="#self-supervised-algorithm">Self-supervised Algorithm</a></li>
+                
+                  <li><a href="#trainable-deep-learning">Trainable Deep Learning</a></li>
+                
+                  <li><a href="#imported-model">Imported Model</a></li>
+                
+                  <li><a href="#output">Output</a></li>
+                
+                  <li><a href="#configure-default-algorithms">Configure Defaults</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+        </aside>
+      
+    </div>
+
+    <div class="backdrop" data-backdrop hidden></div>
+    <script src="/assets/site.js" defer></script>
+  </body>
+</html>

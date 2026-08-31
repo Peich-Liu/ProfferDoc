@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Detailed reference for every proffer.register_algorithm parameter.">
+    <title>Algorithm Registration Parameters - Proffer</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body data-baseurl="">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="topbar" aria-label="Site header">
+      <button class="icon-button menu-toggle" type="button" aria-label="Open navigation" aria-controls="site-sidebar" aria-expanded="false">
+        <span aria-hidden="true"></span>
+      </button>
+      <a class="brand" href="/">Proffer</a>
+      <div class="topbar-actions">
+        <button class="search-trigger" type="button" aria-label="Focus search">
+          <span aria-hidden="true">Search</span>
+          <kbd>/</kbd>
+        </button>
+        <button class="icon-button theme-toggle" type="button" aria-label="Toggle color theme">
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="site-shell">
+      <aside class="sidebar" id="site-sidebar" aria-label="Primary navigation">
+        <div class="sidebar-inner">
+  <label class="search-box">
+    <span class="visually-hidden">Search documentation</span>
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path>
+    </svg>
+    <input id="site-search" type="search" placeholder="Search docs..." autocomplete="off">
+  </label>
+
+  <div class="search-results" id="search-results" aria-live="polite"></div>
+
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <section class="nav-group">
+      <h2>General</h2>
+      <ul>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/installation/">Installation</a></li>
+        <li>
+          <details class="nav-dropdown" open>
+            <summary class="nav-dropdown-toggle">API Reference</summary>
+            <ul class="nav-submenu">
+              <li><a class="nav-link" href="/api/">Overview</a></li>
+              <li><a class="nav-link" href="/api/application/">Application</a></li>
+              <li><a class="nav-link" href="/api/data/">Data</a></li>
+              <li><a class="nav-link" href="/api/features/">Features</a></li>
+              <li class="nav-branch-item">
+                <div class="nav-branch">
+                  <a class="nav-link nav-branch-link" href="/api/algorithms/">Algorithms</a>
+                  <button class="nav-branch-toggle" type="button" aria-label="Toggle Algorithms pages" aria-controls="nav-algorithms-pages" aria-expanded="true" data-nav-toggle>
+                    <span aria-hidden="true"></span>
+                  </button>
+                </div>
+                <ul class="nav-submenu nav-submenu-child" id="nav-algorithms-pages">
+                  <li><a class="nav-link" href="/api/algorithms/parameters/" aria-current="page">Registration Parameters</a></li>
+                </ul>
+              </li>
+              <li><a class="nav-link" href="/api/pipeline/">Pipeline Configuration</a></li>
+              <li><a class="nav-link" href="/api/contexts/">Runtime Contexts</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav-link" href="/tutorials/">Tutorials</a></li>
+      </ul>
+    </section>
+    <section class="nav-group">
+      <h2>About</h2>
+      <ul>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><a class="nav-link" href="/citation/">Citation</a></li>
+        <li><a class="nav-link" href="https://github.com/benjaminhervit/benjaminhervit.github.io">GitHub</a></li>
+      </ul>
+    </section>
+  </nav>
+</div>
+
+      </aside>
+
+      <main class="main" id="main-content" tabindex="-1">
+        <article class="article">
+          <header class="page-header">
+  <h1>Algorithm Registration Parameters</h1>
+  <p>Detailed reference for every option accepted by <code>proffer.register_algorithm()</code>.</p>
+</header>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">proffer</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="n">my_algorithm</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"MyAlgorithm"</span><span class="p">,</span>
+    <span class="n">input_type</span><span class="o">=</span><span class="s">"features"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s">"unsupervised"</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s">"1"</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{},</span>
+    <span class="n">participate_in_fusion</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">features</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="algorithm"><code class="language-plaintext highlighter-rouge">algorithm</code></h2>
+
+<p>The Python function that implements the detector. It receives an Algorithm Context and must return one prediction for every input window.</p>
+
+<p>The function must be named and defined at module level so proffer worker processes can import it. Lambdas and nested functions are not supported.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">my_algorithm</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">(</span><span class="n">scaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">detect</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="name"><code class="language-plaintext highlighter-rouge">name</code></h2>
+
+<p>The name used to identify the algorithm in proffer. If <code class="language-plaintext highlighter-rouge">name</code> is omitted, proffer uses the function name.</p>
+
+<p>Use a stable, descriptive name when run history, configuration, or model files need to refer to the same algorithm consistently.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span><span class="o">=</span><span class="s">"RobustDistance"</span>
+</code></pre></div></div>
+
+<h2 id="input_type"><code class="language-plaintext highlighter-rouge">input_type</code></h2>
+
+<p>Determines which prepared input interfaces are available to the algorithm callable.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Available interface</th>
+      <th>Typical use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">features</code></td>
+      <td><code class="language-plaintext highlighter-rouge">context.features</code></td>
+      <td>Classical machine learning, clustering, and detectors based on engineered features.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">raw_signal</code></td>
+      <td><code class="language-plaintext highlighter-rouge">context.raw_signal</code></td>
+      <td>Signal-processing methods, end-to-end neural networks, and self-supervised methods.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">features_and_raw</code></td>
+      <td>Both interfaces</td>
+      <td>Hybrid methods that combine feature vectors with their corresponding raw windows.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Feature input provides:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">scaled_values</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">numpy</span><span class="p">(</span><span class="n">scaled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">frame</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">dataframe</span><span class="p">()</span>
+<span class="n">windows</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">features</span><span class="p">.</span><span class="n">windows</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Raw-signal input provides:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">signal</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">raw_signal</span><span class="p">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">tensor</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">raw_signal</span><span class="p">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">windows</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">raw_signal</span><span class="p">.</span><span class="n">windows</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>With <code class="language-plaintext highlighter-rouge">features_and_raw</code>, both interfaces describe the same algorithm call and can be used together. Regardless of input type, the callable must return one prediction per Proffer window.</p>
+
+<h2 id="kind"><code class="language-plaintext highlighter-rouge">kind</code></h2>
+
+<p>Describes how the algorithm is used and who manages its training lifecycle.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Behavior</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">unsupervised</code></td>
+      <td>For clustering, outlier detection, self-supervised methods, and algorithms that manage their own training without labeled Proffer data.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">supervised</code></td>
+      <td>For prediction methods that depend on labels. User-defined implementations manage their own labeled data, training, model format, and persistence.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">imported_model</code></td>
+      <td>For externally trained, inference-only models. Proffer loads and runs the model but does not train or update it.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Custom supervised algorithms currently use the complete default Proffer feature set. An imported model may still participate in result fusion.</p>
+
+<h2 id="version"><code class="language-plaintext highlighter-rouge">version</code></h2>
+
+<p>A user-managed identifier for the algorithm implementation, such as <code class="language-plaintext highlighter-rouge">"1"</code> or <code class="language-plaintext highlighter-rouge">"2.1"</code>.</p>
+
+<p>Update the value when you want the registration metadata to distinguish a revised implementation or model contract. Keep it stable when the implementation remains compatible.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">version</span><span class="o">=</span><span class="s">"2"</span>
+</code></pre></div></div>
+
+<h2 id="parameters"><code class="language-plaintext highlighter-rouge">parameters</code></h2>
+
+<p>Configuration values made available as <code class="language-plaintext highlighter-rouge">context.parameters</code>. Values must be JSON-serializable so they can be transferred to worker processes.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+    <span class="s">"model_path"</span><span class="p">:</span> <span class="s">"/path/to/pretrained_model.pt"</span><span class="p">,</span>
+    <span class="s">"decision_threshold"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Read them inside the callable:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model_path</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">parameters</span><span class="p">[</span><span class="s">"model_path"</span><span class="p">]</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">parameters</span><span class="p">[</span><span class="s">"decision_threshold"</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Use parameters for configuration, not for live model objects, open files, tensors, or other process-local state.</p>
+
+<h2 id="participate_in_fusion"><code class="language-plaintext highlighter-rouge">participate_in_fusion</code></h2>
+
+<p>Controls whether the algorithm’s predictions are included when Proffer fuses results from multiple algorithms.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">participate_in_fusion</span><span class="o">=</span><span class="bp">True</span>
+</code></pre></div></div>
+
+<p>Set it to <code class="language-plaintext highlighter-rouge">False</code> when the algorithm should run and expose its own predictions without contributing to the fused result.</p>
+
+<h2 id="features"><code class="language-plaintext highlighter-rouge">features</code></h2>
+
+<p>Selects the feature representation assigned to the algorithm. The value can contain custom feature functions, built-in feature names, or a named feature set.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">features</span><span class="o">=</span><span class="p">[</span>
+    <span class="n">rms</span><span class="p">,</span>
+    <span class="s">"zero_crossings"</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<p>You can also provide a reusable feature set:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">signal_shape</span> <span class="o">=</span> <span class="n">proffer</span><span class="p">.</span><span class="n">feature_set</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">"signal_shape"</span><span class="p">,</span>
+    <span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="n">rms</span><span class="p">,</span> <span class="s">"zero_crossings"</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">proffer</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="n">my_algorithm</span><span class="p">,</span>
+    <span class="n">features</span><span class="o">=</span><span class="n">signal_shape</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>If <code class="language-plaintext highlighter-rouge">features</code> is omitted, Proffer supplies the <a href="/api/features/#default-feature-set">complete default feature set</a>. Custom feature functions passed here are registered automatically. Custom supervised algorithms currently support only the default feature set.</p>
+
+<div class="notice">
+  <strong>Related reference:</strong> return to <a href="/api/algorithms/">Algorithms</a> for complete registration and implementation examples.
+</div>
+
+        </article>
+
+        <footer class="footer" aria-label="Site footer">
+  <p>2026, Proffer project</p>
+  <nav aria-label="Footer links">
+    <a href="/citation/">Citation</a>
+    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io">Repository</a>
+    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io/issues">Issues</a>
+  </nav>
+</footer>
+
+      </main>
+
+      
+        <aside class="toc" aria-label="Page contents">
+          <div class="toc-inner">
+            <p class="toc-title">On this page</p>
+            <nav>
+              <ul>
+                
+                  <li><a href="#algorithm">algorithm</a></li>
+                
+                  <li><a href="#name">name</a></li>
+                
+                  <li><a href="#input_type">input_type</a></li>
+                
+                  <li><a href="#kind">kind</a></li>
+                
+                  <li><a href="#version">version</a></li>
+                
+                  <li><a href="#parameters">parameters</a></li>
+                
+                  <li><a href="#participate_in_fusion">participate_in_fusion</a></li>
+                
+                  <li><a href="#features">features</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+        </aside>
+      
+    </div>
+
+    <div class="backdrop" data-backdrop hidden></div>
+    <script src="/assets/site.js" defer></script>
+  </body>
+</html>

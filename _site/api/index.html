@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Public Python interfaces for extending and configuring Proffer.">
+    <title>API Reference - Proffer</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body data-baseurl="">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="topbar" aria-label="Site header">
+      <button class="icon-button menu-toggle" type="button" aria-label="Open navigation" aria-controls="site-sidebar" aria-expanded="false">
+        <span aria-hidden="true"></span>
+      </button>
+      <a class="brand" href="/">Proffer</a>
+      <div class="topbar-actions">
+        <button class="search-trigger" type="button" aria-label="Focus search">
+          <span aria-hidden="true">Search</span>
+          <kbd>/</kbd>
+        </button>
+        <button class="icon-button theme-toggle" type="button" aria-label="Toggle color theme">
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="site-shell">
+      <aside class="sidebar" id="site-sidebar" aria-label="Primary navigation">
+        <div class="sidebar-inner">
+  <label class="search-box">
+    <span class="visually-hidden">Search documentation</span>
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path>
+    </svg>
+    <input id="site-search" type="search" placeholder="Search docs..." autocomplete="off">
+  </label>
+
+  <div class="search-results" id="search-results" aria-live="polite"></div>
+
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <section class="nav-group">
+      <h2>General</h2>
+      <ul>
+        <li><a class="nav-link" href="/">Home</a></li>
+        <li><a class="nav-link" href="/installation/">Installation</a></li>
+        <li>
+          <details class="nav-dropdown" open>
+            <summary class="nav-dropdown-toggle">API Reference</summary>
+            <ul class="nav-submenu">
+              <li><a class="nav-link" href="/api/" aria-current="page">Overview</a></li>
+              <li><a class="nav-link" href="/api/application/">Application</a></li>
+              <li><a class="nav-link" href="/api/data/">Data</a></li>
+              <li><a class="nav-link" href="/api/features/">Features</a></li>
+              <li class="nav-branch-item">
+                <div class="nav-branch">
+                  <a class="nav-link nav-branch-link" href="/api/algorithms/">Algorithms</a>
+                  <button class="nav-branch-toggle" type="button" aria-label="Toggle Algorithms pages" aria-controls="nav-algorithms-pages" aria-expanded="false" data-nav-toggle>
+                    <span aria-hidden="true"></span>
+                  </button>
+                </div>
+                <ul class="nav-submenu nav-submenu-child" id="nav-algorithms-pages" hidden>
+                  <li><a class="nav-link" href="/api/algorithms/parameters/">Registration Parameters</a></li>
+                </ul>
+              </li>
+              <li><a class="nav-link" href="/api/pipeline/">Pipeline Configuration</a></li>
+              <li><a class="nav-link" href="/api/contexts/">Runtime Contexts</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav-link" href="/tutorials/">Tutorials</a></li>
+      </ul>
+    </section>
+    <section class="nav-group">
+      <h2>About</h2>
+      <ul>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><a class="nav-link" href="/citation/">Citation</a></li>
+        <li><a class="nav-link" href="https://github.com/benjaminhervit/benjaminhervit.github.io">GitHub</a></li>
+      </ul>
+    </section>
+  </nav>
+</div>
+
+      </aside>
+
+      <main class="main" id="main-content" tabindex="-1">
+        <article class="article">
+          <header class="page-header">
+  <h1>API Reference</h1>
+  <p>Public Python interfaces for launching Proffer and extending its signal-processing pipeline.</p>
+</header>
+
+<p>Proffer exposes a compact functional API. Select a section to view its interfaces, requirements, and focused examples.</p>
+
+<div class="card-grid">
+	<article class="card">
+		<h2>Application</h2>
+		<p>Launch Proffer and configure its workspace and processing pipeline.</p>
+		<a class="card-link" href="/api/application/" aria-label="Open Application API"></a>
+	</article>
+	<article class="card">
+		<h2>Data</h2>
+		<p>Load external signals into a validated channel-first representation.</p>
+		<a class="card-link" href="/api/data/" aria-label="Open Data API"></a>
+	</article>
+	<article class="card">
+		<h2>Features</h2>
+		<p>Define numeric features and assemble reusable feature sets.</p>
+		<a class="card-link" href="/api/features/" aria-label="Open Features API"></a>
+	</article>
+	<article class="card">
+		<h2>Algorithms</h2>
+		<p>Register custom window-level detection methods.</p>
+		<a class="card-link" href="/api/algorithms/" aria-label="Open Algorithms API"></a>
+	</article>
+	<article class="card">
+		<h2>Pipeline Configuration</h2>
+		<p>Select algorithms, bind feature sets, and configure window sizes.</p>
+		<a class="card-link" href="/api/pipeline/" aria-label="Open Pipeline Configuration API"></a>
+	</article>
+	<article class="card">
+		<h2>Runtime Contexts</h2>
+		<p>Access prepared inputs and processing metadata inside extensions.</p>
+		<a class="card-link" href="/api/contexts/" aria-label="Open Runtime Contexts API"></a>
+	</article>
+</div>
+
+<div class="notice">
+  <strong>Extension model:</strong> define a module-level function, pass or register it, then run Proffer. Decorators and JSON registration files are not required.
+</div>
+
+        </article>
+
+        <footer class="footer" aria-label="Site footer">
+  <p>2026, Proffer project</p>
+  <nav aria-label="Footer links">
+    <a href="/citation/">Citation</a>
+    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io">Repository</a>
+    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io/issues">Issues</a>
+  </nav>
+</footer>
+
+      </main>
+
+      
+    </div>
+
+    <div class="backdrop" data-backdrop hidden></div>
+    <script src="/assets/site.js" defer></script>
+  </body>
+</html>

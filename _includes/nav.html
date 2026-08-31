@@ -1,0 +1,54 @@
+<div class="sidebar-inner">
+  <label class="search-box">
+    <span class="visually-hidden">Search documentation</span>
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path>
+    </svg>
+    <input id="site-search" type="search" placeholder="Search docs..." autocomplete="off">
+  </label>
+
+  <div class="search-results" id="search-results" aria-live="polite"></div>
+
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <section class="nav-group">
+      <h2>General</h2>
+      <ul>
+        <li><a class="nav-link" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a></li>
+        <li><a class="nav-link" href="{{ '/installation/' | relative_url }}"{% if page.url == '/installation/' %} aria-current="page"{% endif %}>Installation</a></li>
+        <li>
+          <details class="nav-dropdown"{% if page.url contains '/api/' %} open{% endif %}>
+            <summary class="nav-dropdown-toggle">API Reference</summary>
+            <ul class="nav-submenu">
+              <li><a class="nav-link" href="{{ '/api/' | relative_url }}"{% if page.url == '/api/' %} aria-current="page"{% endif %}>Overview</a></li>
+              <li><a class="nav-link" href="{{ '/api/application/' | relative_url }}"{% if page.url == '/api/application/' %} aria-current="page"{% endif %}>Application</a></li>
+              <li><a class="nav-link" href="{{ '/api/data/' | relative_url }}"{% if page.url == '/api/data/' %} aria-current="page"{% endif %}>Data</a></li>
+              <li><a class="nav-link" href="{{ '/api/features/' | relative_url }}"{% if page.url == '/api/features/' %} aria-current="page"{% endif %}>Features</a></li>
+              <li class="nav-branch-item">
+                <div class="nav-branch">
+                  <a class="nav-link nav-branch-link" href="{{ '/api/algorithms/' | relative_url }}"{% if page.url == '/api/algorithms/' %} aria-current="page"{% endif %}>Algorithms</a>
+                  <button class="nav-branch-toggle" type="button" aria-label="Toggle Algorithms pages" aria-controls="nav-algorithms-pages" aria-expanded="{% if page.url contains '/api/algorithms/' %}true{% else %}false{% endif %}" data-nav-toggle>
+                    <span aria-hidden="true"></span>
+                  </button>
+                </div>
+                <ul class="nav-submenu nav-submenu-child" id="nav-algorithms-pages"{% unless page.url contains '/api/algorithms/' %} hidden{% endunless %}>
+                  <li><a class="nav-link" href="{{ '/api/algorithms/parameters/' | relative_url }}"{% if page.url == '/api/algorithms/parameters/' %} aria-current="page"{% endif %}>Registration Parameters</a></li>
+                </ul>
+              </li>
+              <li><a class="nav-link" href="{{ '/api/pipeline/' | relative_url }}"{% if page.url == '/api/pipeline/' %} aria-current="page"{% endif %}>Pipeline Configuration</a></li>
+              <li><a class="nav-link" href="{{ '/api/contexts/' | relative_url }}"{% if page.url == '/api/contexts/' %} aria-current="page"{% endif %}>Runtime Contexts</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav-link" href="{{ '/tutorials/' | relative_url }}"{% if page.url == '/tutorials/' %} aria-current="page"{% endif %}>Tutorials</a></li>
+      </ul>
+    </section>
+    <section class="nav-group">
+      <h2>About</h2>
+      <ul>
+        <li><a class="nav-link" href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a></li>
+        <li><a class="nav-link" href="{{ '/citation/' | relative_url }}"{% if page.url == '/citation/' %} aria-current="page"{% endif %}>Citation</a></li>
+        <li><a class="nav-link" href="https://github.com/benjaminhervit/benjaminhervit.github.io">GitHub</a></li>
+      </ul>
+    </section>
+  </nav>
+</div>

@@ -1,0 +1,24 @@
+title: Proffer
+description: Documentation companion site for the Proffer academic paper/project and progressive signal artefact annotation workflow.
+url: "https://benjaminhervit.github.io"
+baseurl: ""
+markdown: kramdown
+permalink: pretty
+
+exclude:
+  - README.md
+  - Makefile
+  - Gemfile
+  - Gemfile.lock
+  - .venv/
+  - .codex/
+  - .agents/
+  - .bundle/
+  - .gitignore
+  - partials/
+  - node_modules/
+  - vendor/
+  - vendor/bundle/
+  - .sass-cache/
+  - .jekyll-cache/
+  - .codex-tmp/

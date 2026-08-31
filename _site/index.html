@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Documentation companion site for the Proffer academic paper/project and signal artefact annotation workflow.">
+    <title>Proffer - Proffer</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body data-baseurl="">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="topbar" aria-label="Site header">
+      <button class="icon-button menu-toggle" type="button" aria-label="Open navigation" aria-controls="site-sidebar" aria-expanded="false">
+        <span aria-hidden="true"></span>
+      </button>
+      <a class="brand" href="/">Proffer</a>
+      <div class="topbar-actions">
+        <button class="search-trigger" type="button" aria-label="Focus search">
+          <span aria-hidden="true">Search</span>
+          <kbd>/</kbd>
+        </button>
+        <button class="icon-button theme-toggle" type="button" aria-label="Toggle color theme">
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="site-shell">
+      <aside class="sidebar" id="site-sidebar" aria-label="Primary navigation">
+        <div class="sidebar-inner">
+  <label class="search-box">
+    <span class="visually-hidden">Search documentation</span>
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path>
+    </svg>
+    <input id="site-search" type="search" placeholder="Search docs..." autocomplete="off">
+  </label>
+
+  <div class="search-results" id="search-results" aria-live="polite"></div>
+
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <section class="nav-group">
+      <h2>General</h2>
+      <ul>
+        <li><a class="nav-link" href="/" aria-current="page">Home</a></li>
+        <li><a class="nav-link" href="/installation/">Installation</a></li>
+        <li>
+          <details class="nav-dropdown">
+            <summary class="nav-dropdown-toggle">API Reference</summary>
+            <ul class="nav-submenu">
+              <li><a class="nav-link" href="/api/">Overview</a></li>
+              <li><a class="nav-link" href="/api/application/">Application</a></li>
+              <li><a class="nav-link" href="/api/data/">Data</a></li>
+              <li><a class="nav-link" href="/api/features/">Features</a></li>
+              <li class="nav-branch-item">
+                <div class="nav-branch">
+                  <a class="nav-link nav-branch-link" href="/api/algorithms/">Algorithms</a>
+                  <button class="nav-branch-toggle" type="button" aria-label="Toggle Algorithms pages" aria-controls="nav-algorithms-pages" aria-expanded="false" data-nav-toggle>
+                    <span aria-hidden="true"></span>
+                  </button>
+                </div>
+                <ul class="nav-submenu nav-submenu-child" id="nav-algorithms-pages" hidden>
+                  <li><a class="nav-link" href="/api/algorithms/parameters/">Registration Parameters</a></li>
+                </ul>
+              </li>
+              <li><a class="nav-link" href="/api/pipeline/">Pipeline Configuration</a></li>
+              <li><a class="nav-link" href="/api/contexts/">Runtime Contexts</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav-link" href="/tutorials/">Tutorials</a></li>
+      </ul>
+    </section>
+    <section class="nav-group">
+      <h2>About</h2>
+      <ul>
+        <li><a class="nav-link" href="/about/">About</a></li>
+        <li><a class="nav-link" href="/citation/">Citation</a></li>
+        <li><a class="nav-link" href="https://github.com/benjaminhervit/benjaminhervit.github.io">GitHub</a></li>
+      </ul>
+    </section>
+  </nav>
+</div>
+
+      </aside>
+
+      <main class="main" id="main-content" tabindex="-1">
+        <article class="article">
+          <section class="scroller-section hero-section" id="overview">
+  <header class="page-header hero-header">
+  <!-- <p class="eyebrow">Paper companion and workflow documentation</p> -->
+  <h1>Proffer</h1>
+  <p>Faster and better signal artefact annotation with a human-in-the-loop algorithm workflow.</p>
+</header>
+
+  <div class="hero-actions">
+  <a class="button primary" href="#getting-started">Get started</a>
+  <a class="button" href="/tutorials/">Watch tutorial</a>
+  <a class="button ghost" href="https://github.com/benjaminhervit/benjaminhervit.github.io">GitHub</a>
+</div>
+
+  <figure class="overview hero-figure">
+  <img src="/assets/images/overview.png" alt="Overview of the Proffer annotation workflow" />
+  <figcaption>PEICHEN: Overview of the Proffer documentation and annotation workflow. Replace this caption with the final paper figure caption when available.</figcaption>
+</figure>
+</section>
+
+<section class="scroller-section" id="workflow">
+  <h2 id="annotation-workflow">Annotation Workflow</h2>
+
+  <p>AnnoProg is a progressive signal artefact annotation tool that improves artefact annotation efficiency. The tool presents the user with artefact detections based on cross-algorithmic predictions, which continuously improve throughout the session through a human-in-the-loop workflow.</p>
+
+  <p>Algorithmic suggestions and human reviews are incorporated into existing annotation GUI and UX workflows. The goal is to let reviewers use the progressive workflow without disrupting familiar annotation practices.</p>
+
+  <div class="workflow-steps">
+  <article>
+    <span>1</span>
+    <h3>Surface candidates</h3>
+    <p>Use cross-algorithmic predictions to propose signal segments that are likely to contain artefacts.</p>
+  </article>
+  <article>
+    <span>2</span>
+    <h3>Review in context</h3>
+    <p>Keep the human reviewer inside the familiar annotation interface while prioritizing high-value decisions.</p>
+  </article>
+  <article>
+    <span>3</span>
+    <h3>Improve progressively</h3>
+    <p>Feed reviewer decisions back into the workflow so the remaining suggestions become more useful over time.</p>
+  </article>
+</div>
+</section>
+
+<section class="scroller-section" id="getting-started">
+  <h2 id="getting-started">Getting Started</h2>
+
+  <p>Use the dedicated installation page for the canonical setup path, then return here for the paper companion material.</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-m</span> pip <span class="nb">install </span>artiplex
+</code></pre></div>  </div>
+
+  <div class="link-list">
+  <a href="/installation/">
+    <strong>Installation</strong>
+    <span>Install the package and verify your environment.</span>
+  </a>
+  <a href="/api/">
+    <strong>API Reference</strong>
+    <span>Browse public modules, classes, functions, and integration points.</span>
+  </a>
+</div>
+</section>
+
+<section class="scroller-section" id="tutorials">
+  <h2 id="tutorials">Tutorials</h2>
+
+  <p>Start with the walkthrough video to see the annotation interface, file import flow, and segment completion workflow in context.</p>
+
+  <div class="video-grid">
+  <article class="video-card">
+    <h3>Quickstart Walkthrough</h3>
+    <p>Introduce the interface, load a sample signal, review suggested artefacts, and export results.</p>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Proffer quickstart walkthrough" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+    </div>
+  </article>
+</div>
+
+  <p><a class="button" href="/tutorials/">Open tutorial page</a></p>
+</section>
+
+<section class="scroller-section" id="api-reference">
+  <h2 id="api-reference">API Reference</h2>
+
+  <p>The API page is the entry point for public classes, functions, modules, command-line tools, and integration points.</p>
+  <div class="card-grid">
+	<article class="card">
+		<h2>Application</h2>
+		<p>Launch Proffer and configure its workspace and processing pipeline.</p>
+		<a class="card-link" href="/api/application/" aria-label="Open Application API"></a>
+	</article>
+	<article class="card">
+		<h2>Data</h2>
+		<p>Load external signals into a validated channel-first representation.</p>
+		<a class="card-link" href="/api/data/" aria-label="Open Data API"></a>
+	</article>
+	<article class="card">
+		<h2>Features</h2>
+		<p>Define numeric features and assemble reusable feature sets.</p>
+		<a class="card-link" href="/api/features/" aria-label="Open Features API"></a>
+	</article>
+	<article class="card">
+		<h2>Algorithms</h2>
+		<p>Register custom window-level detection methods.</p>
+		<a class="card-link" href="/api/algorithms/" aria-label="Open Algorithms API"></a>
+	</article>
+	<article class="card">
+		<h2>Pipeline Configuration</h2>
+		<p>Select algorithms, bind feature sets, and configure window sizes.</p>
+		<a class="card-link" href="/api/pipeline/" aria-label="Open Pipeline Configuration API"></a>
+	</article>
+	<article class="card">
+		<h2>Runtime Contexts</h2>
+		<p>Access prepared inputs and processing metadata inside extensions.</p>
+		<a class="card-link" href="/api/contexts/" aria-label="Open Runtime Contexts API"></a>
+	</article>
+</div>
+
+  <p><a class="button" href="/api/">Open API reference</a></p>
+</section>
+
+<section class="scroller-section" id="citation">
+  <h2 id="citation">Citation</h2>
+
+  <p>If this project supports your work, please cite the associated paper, software release, or archival DOI.</p>
+
+  <div class="language-bibtex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">@software</span><span class="p">{</span><span class="nl">proffer2026</span><span class="p">,</span>
+<span class="na">author</span> <span class="p">=</span> <span class="s">{proffer Project Team}</span><span class="p">,</span>
+<span class="na">title</span> <span class="p">=</span> <span class="s">{proffer}</span><span class="p">,</span>
+<span class="na">year</span> <span class="p">=</span> <span class="s">{2026}</span><span class="p">,</span>
+<span class="na">url</span> <span class="p">=</span> <span class="s">{https://benjaminhervit.github.io}</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+
+  <p><a class="button" href="/citation/">Citation details</a></p>
+</section>
+
+<section class="scroller-section" id="support">
+  <h2 id="support">Support</h2>
+
+  <p>Project support, acknowledgements, funding information, and reviewer-facing contact details have not been finalized yet. Add the final project links before publishing the site as a paper companion.</p>
+
+  <div class="link-list">
+  <a href="/about/">
+    <strong>About the project</strong>
+    <span>Background, stewardship, maintainers, and project links.</span>
+  </a>
+  <a href="https://github.com/benjaminhervit/benjaminhervit.github.io/issues">
+    <strong>Get help</strong>
+    <span>Ask questions, report issues, and help improve the documentation.</span>
+  </a>
+</div>
+</section>
+
+        </article>
+
+        <footer class="footer" aria-label="Site footer">
+  <p>2026, Proffer project</p>
+  <nav aria-label="Footer links">
+    <a href="/citation/">Citation</a>
+    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io">Repository</a>
+    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io/issues">Issues</a>
+  </nav>
+</footer>
+
+      </main>
+
+      
+        <aside class="toc" aria-label="Page contents">
+          <div class="toc-inner">
+            <p class="toc-title">On this page</p>
+            <nav>
+              <ul>
+                
+                  <li><a href="#overview">Overview</a></li>
+                
+                  <li><a href="#workflow">Workflow</a></li>
+                
+                  <li><a href="#getting-started">Getting Started</a></li>
+                
+                  <li><a href="#tutorials">Tutorials</a></li>
+                
+                  <li><a href="#api-reference">API Reference</a></li>
+                
+                  <li><a href="#citation">Citation</a></li>
+                
+                  <li><a href="#support">Support</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+        </aside>
+      
+    </div>
+
+    <div class="backdrop" data-backdrop hidden></div>
+    <script src="/assets/site.js" defer></script>
+  </body>
+</html>

@@ -2,10 +2,6 @@
 
 This repository contains the GitHub Pages documentation companion site for the Proffer academic paper/project.
 
-The site is a minimal Jekyll site deployed from the `main` branch root at:
-
-https://benjaminhervit.github.io
-
 ## Local Development
 
 Use Ruby 3.0 or newer. The default macOS system Ruby 2.6 is too old for the current GitHub Pages dependency stack.

@@ -9,7 +9,7 @@ toc:
     url: "#overview"
   - title: Quick Start
     url: "#quick-start"
-  - title: Video Tutorial
+  - title: Proffer Walkthrough
     url: "#video-tutorial"
 ---
 
@@ -17,7 +17,7 @@ toc:
 <header class="page-header hero-header">
   <!-- <p class="eyebrow">Paper companion and workflow documentation</p> -->
   <h1>Proffer</h1>
-  <p>Faster and better signal artefact annotation with a human-in-the-loop algorithm workflow.</p>
+  <p>A Progressive Visual Analytics Framework for Artifact Annotation in Long-Term Biological Signals</p>
 </header>
 
 <figure class="overview hero-figure">
@@ -50,21 +50,15 @@ python -m pip install proffer
 </section>
 
 <section class="scroller-section" id="video-tutorial" markdown="1">
-## Video Tutorial
-
-Start with the walkthrough video to see the annotation interface, file import flow, and segment completion workflow in context.
+## Proffer Walkthrough
 
 <div class="video-grid">
-  <article class="video-card">
-    <h3>Quickstart Walkthrough</h3>
-    <p>Introduce the interface, load a sample signal, review suggested artefacts, and export results.</p>
-    <div class="video-wrapper">
-      <video controls preload="metadata" playsinline aria-label="Proffer quickstart walkthrough">
-        <source src="{{ '/assets/video/Basic Intro.mp4' | relative_url }}" type="video/mp4">
-        Your browser does not support HTML video.
-      </video>
-    </div>
-  </article>
+  <div class="video-wrapper">
+    <video controls preload="metadata" playsinline aria-label="Proffer quickstart walkthrough">
+      <source src="{{ '/assets/video/Basic Intro.mp4' | relative_url }}" type="video/mp4">
+      Your browser does not support HTML video.
+    </video>
+  </div>
 </div>
 
 <p><a class="button" href="{{ '/tutorials/' | relative_url }}">Open tutorial page</a></p>

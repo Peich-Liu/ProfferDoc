@@ -35,7 +35,7 @@ toc:
 </div>
 
 <figure class="overview hero-figure">
-  <img src="{{ '/assets/images/overview.png' | relative_url }}" alt="Overview of the Proffer annotation workflow">
+  <img src="{{ '/assets/images/Overview.png' | relative_url }}" alt="Overview of the Proffer annotation workflow">
   <figcaption>PEICHEN: Overview of the Proffer documentation and annotation workflow. Replace this caption with the final paper figure caption when available.</figcaption>
 </figure>
 </section>

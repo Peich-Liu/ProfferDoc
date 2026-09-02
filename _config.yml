@@ -1,7 +1,7 @@
 title: Proffer
 description: Documentation companion site for the Proffer academic paper/project and progressive signal artefact annotation workflow.
-url: "https://benjaminhervit.github.io"
-baseurl: ""
+url: "https://peich-liu.github.io"
+baseurl: "/Proffer"
 markdown: kramdown
 permalink: pretty
 

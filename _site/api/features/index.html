@@ -6,16 +6,16 @@
     <meta name="color-scheme" content="light dark">
     <meta name="description" content="Define features and reusable Proffer feature sets.">
     <title>Features API - Proffer</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/ProfferDoc/assets/css/style.css">
   </head>
-  <body data-baseurl="">
+  <body data-baseurl="/ProfferDoc">
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <header class="topbar" aria-label="Site header">
       <button class="icon-button menu-toggle" type="button" aria-label="Open navigation" aria-controls="site-sidebar" aria-expanded="false">
         <span aria-hidden="true"></span>
       </button>
-      <a class="brand" href="/">Proffer</a>
+      <a class="brand" href="/ProfferDoc/">Proffer</a>
       <div class="topbar-actions">
         <button class="search-trigger" type="button" aria-label="Focus search">
           <span aria-hidden="true">Search</span>
@@ -44,41 +44,39 @@
     <section class="nav-group">
       <h2>General</h2>
       <ul>
-        <li><a class="nav-link" href="/">Home</a></li>
-        <li><a class="nav-link" href="/installation/">Installation</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/">Home</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/installation/">Installation</a></li>
         <li>
           <details class="nav-dropdown" open>
             <summary class="nav-dropdown-toggle">API Reference</summary>
             <ul class="nav-submenu">
-              <li><a class="nav-link" href="/api/">Overview</a></li>
-              <li><a class="nav-link" href="/api/application/">Application</a></li>
-              <li><a class="nav-link" href="/api/data/">Data</a></li>
-              <li><a class="nav-link" href="/api/features/" aria-current="page">Features</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/">Overview</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/application/">Application</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/data/">Data</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/features/" aria-current="page">Features</a></li>
               <li class="nav-branch-item">
                 <div class="nav-branch">
-                  <a class="nav-link nav-branch-link" href="/api/algorithms/">Algorithms</a>
+                  <a class="nav-link nav-branch-link" href="/ProfferDoc/api/algorithms/">Algorithms</a>
                   <button class="nav-branch-toggle" type="button" aria-label="Toggle Algorithms pages" aria-controls="nav-algorithms-pages" aria-expanded="false" data-nav-toggle>
                     <span aria-hidden="true"></span>
                   </button>
                 </div>
                 <ul class="nav-submenu nav-submenu-child" id="nav-algorithms-pages" hidden>
-                  <li><a class="nav-link" href="/api/algorithms/parameters/">Registration Parameters</a></li>
+                  <li><a class="nav-link" href="/ProfferDoc/api/algorithms/parameters/">Registration Parameters</a></li>
                 </ul>
               </li>
-              <li><a class="nav-link" href="/api/pipeline/">Pipeline Configuration</a></li>
-              <li><a class="nav-link" href="/api/contexts/">Runtime Contexts</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/pipeline/">Pipeline Configuration</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/contexts/">Runtime Contexts</a></li>
             </ul>
           </details>
         </li>
-        <li><a class="nav-link" href="/tutorials/">Tutorials</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/tutorials/">Tutorials</a></li>
       </ul>
     </section>
     <section class="nav-group">
       <h2>About</h2>
       <ul>
-        <li><a class="nav-link" href="/about/">About</a></li>
-        <li><a class="nav-link" href="/citation/">Citation</a></li>
-        <li><a class="nav-link" href="https://github.com/benjaminhervit/benjaminhervit.github.io">GitHub</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/about/">About</a></li>
       </ul>
     </section>
   </nav>
@@ -234,9 +232,9 @@
 
 <p>A function named <code class="language-plaintext highlighter-rouge">amplitude</code> returning <code class="language-plaintext highlighter-rouge">{"mean": ..., "maximum": ...}</code> produces the columns <code class="language-plaintext highlighter-rouge">amplitude__mean</code> and <code class="language-plaintext highlighter-rouge">amplitude__maximum</code>.</p>
 
-<h2 id="artiplexfeature_set"><code class="language-plaintext highlighter-rouge">artiplex.feature_set()</code></h2>
+<h2 id="profferfeature_set"><code class="language-plaintext highlighter-rouge">proffer.feature_set()</code></h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">signal_shape</span> <span class="o">=</span> <span class="n">artiplex</span><span class="p">.</span><span class="n">feature_set</span><span class="p">(</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">signal_shape</span> <span class="o">=</span> <span class="n">proffer</span><span class="p">.</span><span class="n">feature_set</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s">"signal_shape"</span><span class="p">,</span>
     <span class="n">features</span><span class="o">=</span><span class="p">[</span>
         <span class="n">rms</span><span class="p">,</span>
@@ -247,9 +245,9 @@
 
 <p>Feature sets can combine module-level functions with built-in feature names. Passing a custom function registers it automatically.</p>
 
-<h2 id="artiplexavailable_features"><code class="language-plaintext highlighter-rouge">artiplex.available_features()</code></h2>
+<h2 id="profferavailable_features"><code class="language-plaintext highlighter-rouge">proffer.available_features()</code></h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">artiplex</span><span class="p">.</span><span class="n">available_features</span><span class="p">())</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">proffer</span><span class="p">.</span><span class="n">available_features</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p>Use <code class="language-plaintext highlighter-rouge">available_features()</code> as the authoritative list for the installed version. The default set is documented in <a href="#default-feature-set">Default Feature Set</a>.</p>
@@ -258,11 +256,6 @@
 
         <footer class="footer" aria-label="Site footer">
   <p>2026, Proffer project</p>
-  <nav aria-label="Footer links">
-    <a href="/citation/">Citation</a>
-    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io">Repository</a>
-    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io/issues">Issues</a>
-  </nav>
 </footer>
 
       </main>
@@ -292,6 +285,6 @@
     </div>
 
     <div class="backdrop" data-backdrop hidden></div>
-    <script src="/assets/site.js" defer></script>
+    <script src="/ProfferDoc/assets/site.js" defer></script>
   </body>
 </html>

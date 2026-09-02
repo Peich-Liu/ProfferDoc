@@ -6,16 +6,16 @@
     <meta name="color-scheme" content="light dark">
     <meta name="description" content="Register custom Proffer detection algorithms.">
     <title>Algorithms API - Proffer</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/ProfferDoc/assets/css/style.css">
   </head>
-  <body data-baseurl="">
+  <body data-baseurl="/ProfferDoc">
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <header class="topbar" aria-label="Site header">
       <button class="icon-button menu-toggle" type="button" aria-label="Open navigation" aria-controls="site-sidebar" aria-expanded="false">
         <span aria-hidden="true"></span>
       </button>
-      <a class="brand" href="/">Proffer</a>
+      <a class="brand" href="/ProfferDoc/">Proffer</a>
       <div class="topbar-actions">
         <button class="search-trigger" type="button" aria-label="Focus search">
           <span aria-hidden="true">Search</span>
@@ -44,41 +44,39 @@
     <section class="nav-group">
       <h2>General</h2>
       <ul>
-        <li><a class="nav-link" href="/">Home</a></li>
-        <li><a class="nav-link" href="/installation/">Installation</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/">Home</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/installation/">Installation</a></li>
         <li>
           <details class="nav-dropdown" open>
             <summary class="nav-dropdown-toggle">API Reference</summary>
             <ul class="nav-submenu">
-              <li><a class="nav-link" href="/api/">Overview</a></li>
-              <li><a class="nav-link" href="/api/application/">Application</a></li>
-              <li><a class="nav-link" href="/api/data/">Data</a></li>
-              <li><a class="nav-link" href="/api/features/">Features</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/">Overview</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/application/">Application</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/data/">Data</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/features/">Features</a></li>
               <li class="nav-branch-item">
                 <div class="nav-branch">
-                  <a class="nav-link nav-branch-link" href="/api/algorithms/" aria-current="page">Algorithms</a>
+                  <a class="nav-link nav-branch-link" href="/ProfferDoc/api/algorithms/" aria-current="page">Algorithms</a>
                   <button class="nav-branch-toggle" type="button" aria-label="Toggle Algorithms pages" aria-controls="nav-algorithms-pages" aria-expanded="true" data-nav-toggle>
                     <span aria-hidden="true"></span>
                   </button>
                 </div>
                 <ul class="nav-submenu nav-submenu-child" id="nav-algorithms-pages">
-                  <li><a class="nav-link" href="/api/algorithms/parameters/">Registration Parameters</a></li>
+                  <li><a class="nav-link" href="/ProfferDoc/api/algorithms/parameters/">Registration Parameters</a></li>
                 </ul>
               </li>
-              <li><a class="nav-link" href="/api/pipeline/">Pipeline Configuration</a></li>
-              <li><a class="nav-link" href="/api/contexts/">Runtime Contexts</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/pipeline/">Pipeline Configuration</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/contexts/">Runtime Contexts</a></li>
             </ul>
           </details>
         </li>
-        <li><a class="nav-link" href="/tutorials/">Tutorials</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/tutorials/">Tutorials</a></li>
       </ul>
     </section>
     <section class="nav-group">
       <h2>About</h2>
       <ul>
-        <li><a class="nav-link" href="/about/">About</a></li>
-        <li><a class="nav-link" href="/citation/">Citation</a></li>
-        <li><a class="nav-link" href="https://github.com/benjaminhervit/benjaminhervit.github.io">GitHub</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/about/">About</a></li>
       </ul>
     </section>
   </nav>
@@ -184,43 +182,43 @@
   </thead>
   <tbody>
     <tr>
-      <td><a href="/api/algorithms/parameters/#algorithm"><code class="language-plaintext highlighter-rouge">algorithm</code></a></td>
+      <td><a href="/ProfferDoc/api/algorithms/parameters/#algorithm"><code class="language-plaintext highlighter-rouge">algorithm</code></a></td>
       <td>Module-level function that implements the detector.</td>
     </tr>
     <tr>
-      <td><a href="/api/algorithms/parameters/#name"><code class="language-plaintext highlighter-rouge">name</code></a></td>
+      <td><a href="/ProfferDoc/api/algorithms/parameters/#name"><code class="language-plaintext highlighter-rouge">name</code></a></td>
       <td>Name shown to Proffer. If omitted, the function name is used.</td>
     </tr>
     <tr>
-      <td><a href="/api/algorithms/parameters/#input_type"><code class="language-plaintext highlighter-rouge">input_type</code></a></td>
+      <td><a href="/ProfferDoc/api/algorithms/parameters/#input_type"><code class="language-plaintext highlighter-rouge">input_type</code></a></td>
       <td>Select features, raw signals, or both as algorithm input.</td>
     </tr>
     <tr>
-      <td><a href="/api/algorithms/parameters/#kind"><code class="language-plaintext highlighter-rouge">kind</code></a></td>
+      <td><a href="/ProfferDoc/api/algorithms/parameters/#kind"><code class="language-plaintext highlighter-rouge">kind</code></a></td>
       <td>Describe the algorithm’s training and inference role.</td>
     </tr>
     <tr>
-      <td><a href="/api/algorithms/parameters/#version"><code class="language-plaintext highlighter-rouge">version</code></a></td>
+      <td><a href="/ProfferDoc/api/algorithms/parameters/#version"><code class="language-plaintext highlighter-rouge">version</code></a></td>
       <td>User-managed implementation version.</td>
     </tr>
     <tr>
-      <td><a href="/api/algorithms/parameters/#parameters"><code class="language-plaintext highlighter-rouge">parameters</code></a></td>
+      <td><a href="/ProfferDoc/api/algorithms/parameters/#parameters"><code class="language-plaintext highlighter-rouge">parameters</code></a></td>
       <td>JSON-serializable configuration exposed to the callable.</td>
     </tr>
     <tr>
-      <td><a href="/api/algorithms/parameters/#participate_in_fusion"><code class="language-plaintext highlighter-rouge">participate_in_fusion</code></a></td>
+      <td><a href="/ProfferDoc/api/algorithms/parameters/#participate_in_fusion"><code class="language-plaintext highlighter-rouge">participate_in_fusion</code></a></td>
       <td>Control whether predictions enter result fusion.</td>
     </tr>
     <tr>
-      <td><a href="/api/algorithms/parameters/#features"><code class="language-plaintext highlighter-rouge">features</code></a></td>
+      <td><a href="/ProfferDoc/api/algorithms/parameters/#features"><code class="language-plaintext highlighter-rouge">features</code></a></td>
       <td>Assign feature functions, built-in names, or a feature set.</td>
     </tr>
   </tbody>
 </table>
 
-<p>If <code class="language-plaintext highlighter-rouge">features</code> is omitted, the algorithm uses the <a href="/api/features/#default-feature-set">complete default feature set</a>. Passing feature functions directly registers them automatically.</p>
+<p>If <code class="language-plaintext highlighter-rouge">features</code> is omitted, the algorithm uses the <a href="/ProfferDoc/api/features/#default-feature-set">complete default feature set</a>. Passing feature functions directly registers them automatically.</p>
 
-<p><a href="/api/algorithms/parameters/">Open the complete registration parameter reference</a></p>
+<p><a href="/ProfferDoc/api/algorithms/parameters/">Open the complete registration parameter reference</a></p>
 
 <h2 id="algorithm-types">Algorithm Types</h2>
 
@@ -296,7 +294,7 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">import</span> <span class="nn">artiplex</span>
+<span class="kn">import</span> <span class="nn">proffer</span>
 <span class="kn">import</span> <span class="nn">joblib</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 
@@ -321,7 +319,7 @@
     <span class="k">return</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">values</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
 
-<span class="n">artiplex</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+<span class="n">proffer</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
     <span class="n">algorithm</span><span class="o">=</span><span class="n">custom_supervised_detector</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s">"CustomSupervisedDetector"</span><span class="p">,</span>
     <span class="n">kind</span><span class="o">=</span><span class="s">"supervised"</span><span class="p">,</span>
@@ -330,14 +328,14 @@
 <span class="p">)</span>
 </code></pre></div></div>
 
-<p>Artiplex’s automatic training workflow trains the built-in supervised algorithms. For a user-defined supervised algorithm, the user manages the labeled data, training process, model format, checkpoints, and feature compatibility. Custom supervised algorithms currently use the default Artiplex feature set only.</p>
+<p>Proffer’s automatic training workflow trains the built-in supervised algorithms. For a user-defined supervised algorithm, the user manages the labeled data, training process, model format, checkpoints, and feature compatibility. Custom supervised algorithms currently use the default proffer feature set only.</p>
 
 <h2 id="self-supervised-algorithm">Self-supervised Algorithm</h2>
 
 <p>A self-supervised method creates its training target from the input signal and does not require human labels. This example predicts the next sample from previous samples and uses prediction error as an anomaly score.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">artiplex</span>
+<span class="kn">import</span> <span class="nn">proffer</span>
 
 
 <span class="k">def</span> <span class="nf">self_supervised_detector</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
@@ -367,7 +365,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
 
-<span class="n">artiplex</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+<span class="n">proffer</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
     <span class="n">algorithm</span><span class="o">=</span><span class="n">self_supervised_detector</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s">"SelfSupervisedDetector"</span><span class="p">,</span>
     <span class="n">kind</span><span class="o">=</span><span class="s">"unsupervised"</span><span class="p">,</span>
@@ -376,15 +374,15 @@
 <span class="p">)</span>
 </code></pre></div></div>
 
-<p>Self-supervised methods use <code class="language-plaintext highlighter-rouge">kind="unsupervised"</code> because they do not depend on labeled Artiplex data.</p>
+<p>Self-supervised methods use <code class="language-plaintext highlighter-rouge">kind="unsupervised"</code> because they do not depend on labeled Proffer data.</p>
 
 <h2 id="trainable-deep-learning">Trainable Deep Learning</h2>
 
-<p>A custom deep learning algorithm can restore a checkpoint, continue training, save its updated state, and then produce predictions. Artiplex invokes the callable; the implementation manages the network, loss, optimizer, training schedule, and checkpoint format.</p>
+<p>A custom deep learning algorithm can restore a checkpoint, continue training, save its updated state, and then produce predictions. Proffer invokes the callable; the implementation manages the network, loss, optimizer, training schedule, and checkpoint format.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">import</span> <span class="nn">artiplex</span>
+<span class="kn">import</span> <span class="nn">proffer</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 
@@ -440,7 +438,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">int64</span><span class="p">)</span>
 
 
-<span class="n">artiplex</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+<span class="n">proffer</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
     <span class="n">algorithm</span><span class="o">=</span><span class="n">trainable_deep_detector</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s">"TrainableDeepDetector"</span><span class="p">,</span>
     <span class="n">kind</span><span class="o">=</span><span class="s">"unsupervised"</span><span class="p">,</span>
@@ -453,11 +451,11 @@
 
 <h2 id="imported-model">Imported Model</h2>
 
-<p>Use <code class="language-plaintext highlighter-rouge">kind="imported_model"</code> when a model was trained outside Artiplex and should only produce predictions.</p>
+<p>Use <code class="language-plaintext highlighter-rouge">kind="imported_model"</code> when a model was trained outside Proffer and should only produce predictions.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">import</span> <span class="nn">artiplex</span>
+<span class="kn">import</span> <span class="nn">proffer</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 
@@ -497,7 +495,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">int64</span><span class="p">)</span>
 
 
-<span class="n">artiplex</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
+<span class="n">proffer</span><span class="p">.</span><span class="n">register_algorithm</span><span class="p">(</span>
     <span class="n">algorithm</span><span class="o">=</span><span class="n">imported_deep_detector</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s">"ImportedDeepDetector"</span><span class="p">,</span>
     <span class="n">kind</span><span class="o">=</span><span class="s">"imported_model"</span><span class="p">,</span>
@@ -510,36 +508,36 @@
 <span class="p">)</span>
 </code></pre></div></div>
 
-<p>An imported model does not create an optimizer, call <code class="language-plaintext highlighter-rouge">backward()</code>, save updated weights, or enter the Artiplex supervised training workflow. Its predictions can still participate in result fusion. The external model must use the same feature order and preprocessing as the input supplied by Artiplex.</p>
+<p>An imported model does not create an optimizer, call <code class="language-plaintext highlighter-rouge">backward()</code>, save updated weights, or enter the Proffer supervised training workflow. Its predictions can still participate in result fusion. The external model must use the same feature order and preprocessing as the input supplied by Proffer.</p>
 
 <h2 id="output">Output</h2>
 
-<p>The algorithm must return one prediction for every Artiplex window. Supported output types are Python lists, NumPy arrays, Pandas Series, and PyTorch tensors.</p>
+<p>The algorithm must return one prediction for every Proffer window. Supported output types are Python lists, NumPy arrays, Pandas Series, and PyTorch tensors.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Artiplex interprets <code class="language-plaintext highlighter-rouge">0</code> as normal and <code class="language-plaintext highlighter-rouge">1</code> as anomalous. The number of returned predictions must equal the number of input windows.</p>
+<p>Proffer interprets <code class="language-plaintext highlighter-rouge">0</code> as normal and <code class="language-plaintext highlighter-rouge">1</code> as anomalous. The number of returned predictions must equal the number of input windows.</p>
 
 <h2 id="configure-default-algorithms">Configure Default Algorithms</h2>
 
 <p>Default algorithms are enabled automatically. Registered user algorithms are added to the same pipeline.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">artiplex</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">proffer</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
 
 <span class="c1"># Equivalent explicit configuration
-</span><span class="n">artiplex</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">use_default_algorithms</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span><span class="n">proffer</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">use_default_algorithms</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Disable the complete built-in collection to run only registered user algorithms:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">artiplex</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">use_default_algorithms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">proffer</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">use_default_algorithms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Select or exclude algorithms by their configuration names:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Run these built-ins plus registered user algorithms.
-</span><span class="n">artiplex</span><span class="p">.</span><span class="n">run</span><span class="p">(</span>
+</span><span class="n">proffer</span><span class="p">.</span><span class="n">run</span><span class="p">(</span>
     <span class="n">default_algorithms</span><span class="o">=</span><span class="p">[</span>
         <span class="s">"KMeans"</span><span class="p">,</span>
         <span class="s">"LOF"</span><span class="p">,</span>
@@ -548,7 +546,7 @@
 <span class="p">)</span>
 
 <span class="c1"># Run all built-ins except these algorithms.
-</span><span class="n">artiplex</span><span class="p">.</span><span class="n">run</span><span class="p">(</span>
+</span><span class="n">proffer</span><span class="p">.</span><span class="n">run</span><span class="p">(</span>
     <span class="n">exclude_default_algorithms</span><span class="o">=</span><span class="p">[</span>
         <span class="s">"GMM"</span><span class="p">,</span>
         <span class="s">"SVM_RBF"</span><span class="p">,</span>
@@ -562,11 +560,6 @@
 
         <footer class="footer" aria-label="Site footer">
   <p>2026, Proffer project</p>
-  <nav aria-label="Footer links">
-    <a href="/citation/">Citation</a>
-    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io">Repository</a>
-    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io/issues">Issues</a>
-  </nav>
 </footer>
 
       </main>
@@ -608,6 +601,6 @@
     </div>
 
     <div class="backdrop" data-backdrop hidden></div>
-    <script src="/assets/site.js" defer></script>
+    <script src="/ProfferDoc/assets/site.js" defer></script>
   </body>
 </html>

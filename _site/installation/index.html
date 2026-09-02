@@ -6,16 +6,16 @@
     <meta name="color-scheme" content="light dark">
     <meta name="description" content="Installation and environment setup instructions for Proffer.">
     <title>Installation - Proffer</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/ProfferDoc/assets/css/style.css">
   </head>
-  <body data-baseurl="">
+  <body data-baseurl="/ProfferDoc">
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <header class="topbar" aria-label="Site header">
       <button class="icon-button menu-toggle" type="button" aria-label="Open navigation" aria-controls="site-sidebar" aria-expanded="false">
         <span aria-hidden="true"></span>
       </button>
-      <a class="brand" href="/">Proffer</a>
+      <a class="brand" href="/ProfferDoc/">Proffer</a>
       <div class="topbar-actions">
         <button class="search-trigger" type="button" aria-label="Focus search">
           <span aria-hidden="true">Search</span>
@@ -44,41 +44,39 @@
     <section class="nav-group">
       <h2>General</h2>
       <ul>
-        <li><a class="nav-link" href="/">Home</a></li>
-        <li><a class="nav-link" href="/installation/" aria-current="page">Installation</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/">Home</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/installation/" aria-current="page">Installation</a></li>
         <li>
           <details class="nav-dropdown">
             <summary class="nav-dropdown-toggle">API Reference</summary>
             <ul class="nav-submenu">
-              <li><a class="nav-link" href="/api/">Overview</a></li>
-              <li><a class="nav-link" href="/api/application/">Application</a></li>
-              <li><a class="nav-link" href="/api/data/">Data</a></li>
-              <li><a class="nav-link" href="/api/features/">Features</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/">Overview</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/application/">Application</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/data/">Data</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/features/">Features</a></li>
               <li class="nav-branch-item">
                 <div class="nav-branch">
-                  <a class="nav-link nav-branch-link" href="/api/algorithms/">Algorithms</a>
+                  <a class="nav-link nav-branch-link" href="/ProfferDoc/api/algorithms/">Algorithms</a>
                   <button class="nav-branch-toggle" type="button" aria-label="Toggle Algorithms pages" aria-controls="nav-algorithms-pages" aria-expanded="false" data-nav-toggle>
                     <span aria-hidden="true"></span>
                   </button>
                 </div>
                 <ul class="nav-submenu nav-submenu-child" id="nav-algorithms-pages" hidden>
-                  <li><a class="nav-link" href="/api/algorithms/parameters/">Registration Parameters</a></li>
+                  <li><a class="nav-link" href="/ProfferDoc/api/algorithms/parameters/">Registration Parameters</a></li>
                 </ul>
               </li>
-              <li><a class="nav-link" href="/api/pipeline/">Pipeline Configuration</a></li>
-              <li><a class="nav-link" href="/api/contexts/">Runtime Contexts</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/pipeline/">Pipeline Configuration</a></li>
+              <li><a class="nav-link" href="/ProfferDoc/api/contexts/">Runtime Contexts</a></li>
             </ul>
           </details>
         </li>
-        <li><a class="nav-link" href="/tutorials/">Tutorials</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/tutorials/">Tutorials</a></li>
       </ul>
     </section>
     <section class="nav-group">
       <h2>About</h2>
       <ul>
-        <li><a class="nav-link" href="/about/">About</a></li>
-        <li><a class="nav-link" href="/citation/">Citation</a></li>
-        <li><a class="nav-link" href="https://github.com/benjaminhervit/benjaminhervit.github.io">GitHub</a></li>
+        <li><a class="nav-link" href="/ProfferDoc/about/">About</a></li>
       </ul>
     </section>
   </nav>
@@ -103,16 +101,16 @@
 
 <h2 id="install-with-pip">Install with pip</h2>
 
-<p>Replace the package name below with the final published package name if it differs from <code class="language-plaintext highlighter-rouge">artiplex</code>.</p>
+<p>Replace the package name below with the final published package name if it differs from <code class="language-plaintext highlighter-rouge">proffer</code>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-m</span> pip <span class="nb">install </span>artiplex
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-m</span> pip <span class="nb">install </span>proffer
 </code></pre></div></div>
 
 <h2 id="install-with-conda">Install with conda</h2>
 
 <p>If a conda package is published, document the canonical channel here.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda <span class="nb">install</span> <span class="nt">-c</span> conda-forge artiplex
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda <span class="nb">install</span> <span class="nt">-c</span> conda-forge proffer
 </code></pre></div></div>
 
 <h2 id="install-from-source">Install from source</h2>
@@ -120,13 +118,13 @@
 <p>Replace <code class="language-plaintext highlighter-rouge">SOURCE_REPOSITORY_URL</code> with the final source-code repository before publishing these instructions.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone SOURCE_REPOSITORY_URL
-<span class="nb">cd </span>artiplex
+<span class="nb">cd </span>proffer
 python <span class="nt">-m</span> pip <span class="nb">install</span> <span class="nt">-e</span> <span class="nb">.</span>
 </code></pre></div></div>
 
 <h2 id="verify-the-installation">Verify the Installation</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-c</span> <span class="s2">"import artiplex; print(artiplex.__version__)"</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-c</span> <span class="s2">"import proffer; print(proffer.__version__)"</span>
 </code></pre></div></div>
 
 <p>If the project is distributed under a different import name, update this verification command before publishing.</p>
@@ -135,11 +133,6 @@ python <span class="nt">-m</span> pip <span class="nb">install</span> <span clas
 
         <footer class="footer" aria-label="Site footer">
   <p>2026, Proffer project</p>
-  <nav aria-label="Footer links">
-    <a href="/citation/">Citation</a>
-    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io">Repository</a>
-    <a href="https://github.com/benjaminhervit/benjaminhervit.github.io/issues">Issues</a>
-  </nav>
 </footer>
 
       </main>
@@ -169,6 +162,6 @@ python <span class="nt">-m</span> pip <span class="nb">install</span> <span clas
     </div>
 
     <div class="backdrop" data-backdrop hidden></div>
-    <script src="/assets/site.js" defer></script>
+    <script src="/ProfferDoc/assets/site.js" defer></script>
   </body>
 </html>

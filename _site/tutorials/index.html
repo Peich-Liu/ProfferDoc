@@ -101,17 +101,102 @@
   </div>
 </div>
 
-<h2 id="chapter-1">Chapter 1</h2>
+<h2 id="your-first-annotation-session">Your First Annotation Session</h2>
+<p>This tutorial guides you through opening a recording, reviewing artifact suggestions, and submitting your first segment in Proffer.</p>
+<h3 id="open-a-recording">Open a recording</h3>
+<p>You can select a recording in two ways: specify its file path in your <a href="/ProfferDoc/api/application/#profferrun">Python startup script</a>, or launch Proffer and select the file through the interface.
+Import Proffer in the script with <code class="language-plaintext highlighter-rouge">import proffer</code>.
+Once the recording is loaded, check the channel names, sampling rate, and recording duration in the metadata panel. The overview shows your position in the recording, while the detailed view displays the signal and artifact annotations.</p>
+<figure>
+  <img src="/ProfferDoc/assets/images/tutorials/chapter-1/open-recording.png" alt="Selecting a recording and starting annotation in Proffer" width="100%" />
+  <figcaption>Select a recording, then start annotation.</figcaption>
+</figure>
 
-<!-- Tutorial video and content will be added here. -->
+<h3 id="review-a-segment">Review a segment</h3>
+<p>You can follow the recommended segment order to help Proffer make use of your feedback as you review. Submitting each reviewed segment allows that feedback to inform subsequent predictions. You are also free to explore other parts of the recording. Use the Segment Control Panel to navigate to the recommended segment.</p>
+<figure>
+  <img src="/ProfferDoc/assets/images/tutorials/chapter-1/review-segment.png" alt="Reviewing a signal segment in Proffer" width="100%" />
+  <figcaption>Review the selected signal segment.</figcaption>
+</figure>
 
-<h2 id="chapter-2">Chapter 2</h2>
+<h3 id="check-and-apply">Check and apply</h3>
+<p>Once all suggestions have been resolved, the segment becomes review-ready. Inspect the entire segment for missed artifacts before continuing.
+When your review is complete, click Apply in the segment-review panel. This applies your reviewed annotations as reference data for subsequent model updates and marks the segment as completed.</p>
+<figure>
+  <img src="/ProfferDoc/assets/images/tutorials/chapter-1/check-and-apply.png" alt="A reviewed segment and the Apply button" width="100%" />
+  <figcaption>Apply the completed segment review.</figcaption>
+</figure>
 
-<!-- Tutorial video and content will be added here. -->
+<p>As you continue, Proffer uses feedback from previously submitted segments to refine subsequent suggestions. You can follow the recommended order to continue reviewing with this updated algorithmic support:
+Review suggestions → check for missed artifacts → submit.
+You have now completed your first annotation cycle and provided feedback to support the next stage of analysis.</p>
 
-<h2 id="chapter-3">Chapter 3</h2>
+<h3 id="understanding-annotation-states">Understanding annotation states</h3>
 
-<!-- Tutorial video and content will be added here. -->
+<p>Proffer uses three annotation states to help you track your review:</p>
+<ul>
+  <li>Suggestion: An algorithm-generated region awaiting your review.</li>
+  <li>Approved: An annotation you have accepted, adjusted, or added, but have not yet submitted.</li>
+  <li>Confirmed: An annotation submitted as reference data for subsequent model updates.</li>
+</ul>
+
+<figure>
+  <img src="/ProfferDoc/assets/images/tutorials/chapter-1/annotation-states-legend.png" alt="Suggestion, Approved, and Confirmed annotation states" width="100%" />
+  <figcaption>The three annotation states.</figcaption>
+</figure>
+
+<figure>
+  <img src="/ProfferDoc/assets/images/tutorials/chapter-1/annotation-states-example.png" alt="Annotation states displayed on signal channels" width="100%" />
+  <figcaption>Annotation states in the signal view.</figcaption>
+</figure>
+
+<h2 id="customizing-proffer">Customizing Proffer</h2>
+
+<p>You can adapt Proffer to your own data and detection methods through its Python interfaces. Choose the sections below that match your needs; each links to examples and detailed API instructions.</p>
+
+<h3 id="load-your-own-data">Load your own data</h3>
+
+<p>If your recording requires a custom reader, define a dataloader that receives a file path and returns <code class="language-plaintext highlighter-rouge">proffer.SignalData</code>. Organize the signal as <code class="language-plaintext highlighter-rouge">[channels, samples]</code> and provide its sampling rate and channel names.</p>
+
+<p>Pass your loader to <code class="language-plaintext highlighter-rouge">proffer.run()</code> using the <code class="language-plaintext highlighter-rouge">dataloader</code> parameter. Open a recording and check that the channels, duration, and waveforms appear as expected before starting your review.</p>
+
+<p>See the <a href="/ProfferDoc/api/data/">Data API</a> for the loader example and input requirements.</p>
+
+<h3 id="add-custom-features">Add custom features</h3>
+
+<p>To describe signal characteristics relevant to your task, define a feature function that accepts one signal window and returns a number or a dictionary of named numbers.</p>
+
+<p>You can combine your functions with built-in features using <code class="language-plaintext highlighter-rouge">proffer.feature_set()</code>, then assign the feature set to an algorithm. Algorithms without a custom feature configuration retain their default features.</p>
+
+<p>See the <a href="/ProfferDoc/api/features/">Features API</a> for examples and <a href="/ProfferDoc/api/pipeline/">Pipeline Configuration</a> for assigning features to algorithms.</p>
+
+<h3 id="add-a-custom-algorithm">Add a custom algorithm</h3>
+
+<p>To use your own detector, define a function that receives a Proffer algorithm context. Your detector can work with extracted features, raw signals, or both.</p>
+
+<p>Return one prediction per analysis window: <code class="language-plaintext highlighter-rouge">0</code> for normal and <code class="language-plaintext highlighter-rouge">1</code> for anomalous. Register the function with <code class="language-plaintext highlighter-rouge">proffer.register_algorithm()</code>, selecting its input type and whether its predictions should participate in fusion.</p>
+
+<p>Your detector can run alongside the built-in algorithms, or you can disable them to run only your registered methods.</p>
+
+<p>See the <a href="/ProfferDoc/api/algorithms/">Algorithms API</a> for examples and the <a href="/ProfferDoc/api/algorithms/parameters/">Registration Parameters</a> for configuration details.</p>
+
+<h3 id="use-an-existing-model">Use an existing model</h3>
+
+<p>If you already have a trained model, register it with <code class="language-plaintext highlighter-rouge">kind="imported_model"</code>. Ensure that its input preparation matches the features, ordering, and preprocessing used during training.</p>
+
+<p>Imported models provide predictions and can participate in fusion, but Proffer does not retrain them. For custom supervised algorithms, you manage training and model persistence yourself. Custom supervised algorithms currently use the default Proffer feature set only.</p>
+
+<p>See the <a href="/ProfferDoc/api/algorithms/#imported-model">Imported Model example</a> and the <a href="/ProfferDoc/api/algorithms/#custom-supervised-algorithm">Custom Supervised Algorithm example</a> for implementation details.</p>
+
+<h3 id="run-your-customized-workflow">Run your customized workflow</h3>
+
+<p>Define custom functions at module level and place the <code class="language-plaintext highlighter-rouge">proffer.run()</code> call inside an <code class="language-plaintext highlighter-rouge">if __name__ == "__main__":</code> guard so worker processes can load them correctly.</p>
+
+<p>Start with a short recording to check your data loading and prediction outputs. Once configured, follow the same annotation workflow:</p>
+
+<p><strong>Review suggestions → check for missed artifacts → Apply.</strong></p>
+
+<p>See the <a href="/ProfferDoc/api/application/">Application API</a> for startup options and <a href="/ProfferDoc/api/contexts/">Runtime Contexts</a> for the inputs available to custom functions.</p>
 
         </article>
 
@@ -126,11 +211,9 @@
                 
                   <li><a href="#proffer-walkthrough">Proffer Walkthrough</a></li>
                 
-                  <li><a href="#chapter-1">Chapter 1</a></li>
+                  <li><a href="#your-first-annotation-session">Your First Annotation Session</a></li>
                 
-                  <li><a href="#chapter-2">Chapter 2</a></li>
-                
-                  <li><a href="#chapter-3">Chapter 3</a></li>
+                  <li><a href="#customizing-proffer">Customizing Proffer</a></li>
                 
               </ul>
             </nav>
